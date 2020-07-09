@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using NationalInstruments;
@@ -70,8 +71,8 @@ namespace ExamplePlugins.ExampleDocument.Shell
         public static readonly ICommandEx EditingGroupCommand = new ShellRelayCommand(ShellDocumentCommandHelpers.HandleNoop)
         {
             UniqueId = "ExamplePlugins.EditingGroupCommand",
-            LargeImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Placeholder_32x32.png"),
-            SmallImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Placeholder_16x16.png"),
+            LargeImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Placeholder_32x32.png", CultureInfo.CurrentCulture),
+            SmallImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Placeholder_16x16.png", CultureInfo.CurrentCulture),
             LabelTitle = "Editing"
         };
 
@@ -81,8 +82,8 @@ namespace ExamplePlugins.ExampleDocument.Shell
         private ICommandEx CutCommand = new ShellRelayCommand(HandleCut, CanCut)
         {
             UniqueId = "ExamplePlugins.CutCommand",
-            LargeImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Cut_32x32.png"),
-            SmallImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Cut_16x16.png"),
+            LargeImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Cut_32x32.png", CultureInfo.CurrentCulture),
+            SmallImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Cut_16x16.png", CultureInfo.CurrentCulture),
             LabelTitle = "Cut"
         };
 
@@ -119,8 +120,8 @@ namespace ExamplePlugins.ExampleDocument.Shell
         private ICommandEx CopyCommand = new ShellRelayCommand(HandleCopy, CanCopy)
         {
             UniqueId = "ExamplePlugins.CopyCommand",
-            LargeImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Copy_32x32.png"),
-            SmallImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Copy_16x16.png"),
+            LargeImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Copy_32x32.png", CultureInfo.CurrentCulture),
+            SmallImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Copy_16x16.png", CultureInfo.CurrentCulture),
             LabelTitle = "Copy"
         };
 
@@ -157,8 +158,8 @@ namespace ExamplePlugins.ExampleDocument.Shell
         private ICommandEx PasteCommand = new ShellRelayCommand(HandlePaste, CanPaste)
         {
             UniqueId = "ExamplePlugins.PasteCommand",
-            LargeImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Paste_32x32.png"),
-            SmallImageSource = ResourceHelpers.LoadBitmapImage(typeof(TextDocument), "Resources/Paste_16x16.png"),
+            LargeImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Paste_32x32.png", CultureInfo.CurrentCulture),
+            SmallImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocument), "Resources/Paste_16x16.png", CultureInfo.CurrentCulture),
             LabelTitle = "Paste"
         };
 

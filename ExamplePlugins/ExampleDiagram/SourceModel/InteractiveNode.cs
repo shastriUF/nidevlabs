@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using NationalInstruments.CommonModel;
 using NationalInstruments.DataTypes;
 using NationalInstruments.SourceModel;
 using NationalInstruments.SourceModel.Persistence;
@@ -114,7 +113,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static InteractiveNode Create(IElementCreateInfo info)
         {
             var node = new InteractiveNode();
-            node.Init(info);
+            node.Initialize(info);
             return node;
         }
 
@@ -133,9 +132,9 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// Performs node initialization
         /// </summary>
         /// <param name="info">Information about why the node is being created</param>
-        protected override void Init(IElementCreateInfo info)
+        protected override void Initialize(IElementCreateInfo info)
         {
-            base.Init(info);
+            base.Initialize(info);
             Width = 80;
             Height = 50;
 

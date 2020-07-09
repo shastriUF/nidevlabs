@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using NationalInstruments.CommonModel;
 using NationalInstruments.DataTypes;
 using NationalInstruments.DynamicProperties;
 using NationalInstruments.SourceModel;
@@ -64,7 +65,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static GrowableNode Create(IElementCreateInfo elementCreateInfo)
         {
             var node = new GrowableNode();
-            node.Init(elementCreateInfo);
+            node.Initialize(elementCreateInfo);
             return node;
         }
 
@@ -91,7 +92,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// to a chunk- only fixed terminals.  Note that if TopMargin is 0, we can still have fixed terminals
         /// because the minimum chunk count might be >= 1.  The offsets of the fixed terminals never change.
         /// </summary>
-        public float TopMargin
+        public override float TopMargin
         {
             get
             {
@@ -102,7 +103,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// <summary>
         /// The margin between the bottom of the last chunk and the bottom of the node.
         /// </summary>
-        public float BottomMargin
+        public override float BottomMargin
         {
             get
             {
@@ -115,7 +116,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// </summary>
         /// <param name="chunkIndex">the chunk index (useful for dynamic chunk nodes; you can pass -1 if it's not a dynamic chunk node)</param>
         /// <returns>the height of the chunk in question</returns>
-        public float GetVerticalChunkHeight(int chunkIndex)
+        public override float GetVerticalChunkHeight(int chunkIndex)
         {
             return 20;
         }
@@ -126,7 +127,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// </summary>
         /// <param name="chunkIndex">0-based index of the chunk in question.</param>
         /// <returns>The vertical offset from the top of the node of the chunk in question</returns>
-        public float OffsetForVerticalChunk(int chunkIndex)
+        public override float OffsetForVerticalChunk(int chunkIndex)
         {
             return TopMargin + chunkIndex * this.GetFixedSizeVerticalChunkHeight();
         }
@@ -137,19 +138,19 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// </summary>
         /// <param name="chunkCount">Count of chunks</param>
         /// <returns>The height in pixels of the node for the given chunk count</returns>
-        public float NodeHeightForVerticalChunkCount(int chunkCount)
+        public override float NodeHeightForVerticalChunkCount(int chunkCount)
         {
             return TopMargin + chunkCount * this.GetFixedSizeVerticalChunkHeight() + BottomMargin;
         }
 
         /// <inheritdoc/>
-        public float TerminalHeight
+        public override float TerminalHeight
         {
             get { return Template == ViewElementTemplate.List ? StockDiagramGeometries.LargeTerminalHeight : StockDiagramGeometries.StandardTerminalHeight; }
         }
 
         /// <inheritdoc/>
-        public float TerminalHotspotVerticalOffset
+        public override float TerminalHotspotVerticalOffset
         {
             get { return TerminalHotspots.HotspotVerticalOffsetForTerminalSize(TerminalSize.Small); }
         }

@@ -40,7 +40,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static SplineWire Create(IElementCreateInfo elementCreateInfo)
         {
             var wire = new SplineWire();
-            wire.Init(elementCreateInfo);
+            wire.Initialize(elementCreateInfo);
             return wire;
         }
 
@@ -95,7 +95,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
             {
                 throw new ArgumentException("Wire must be a child of a Diagram", "wire");
             }
-            SMPoint position = point.TransformTo(Diagram).Point;
+            SMPoint position = point.TransformTo(OwningDiagram).Point;
             foreach (var joint in Joints)
             {
                 float distance = joint.GetDistance(position);

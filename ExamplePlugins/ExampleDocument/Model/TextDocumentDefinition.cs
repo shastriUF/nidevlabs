@@ -1,7 +1,6 @@
 ﻿using System.Xml.Linq;
 using NationalInstruments.DynamicProperties;
 using NationalInstruments.SourceModel;
-using NationalInstruments.SourceModel.Envoys;
 using NationalInstruments.SourceModel.Persistence;
 using NationalInstruments.Core;
 
@@ -81,7 +80,7 @@ namespace ExamplePlugins.ExampleDocument.Model
         public static TextDocumentDefinition Create(IElementCreateInfo elementCreateInfo)
         {
             var definition = new TextDocumentDefinition();
-            definition.Init(elementCreateInfo);
+            definition.Initialize(elementCreateInfo);
             return definition;
         }
 

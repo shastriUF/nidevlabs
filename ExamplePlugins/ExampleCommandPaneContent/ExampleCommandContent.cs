@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using NationalInstruments;
@@ -41,7 +42,7 @@ namespace ExamplePlugins.ExampleCommandPaneContent
         {
             UniqueId = "ExamplePlugins.MultiplyBy10Command",
             LabelTitle = "Multiply By 10",
-            LargeImageSource = ResourceHelpers.LoadBitmapImage(typeof(ExampleCommandContent), "Resources/10x.png")
+            LargeImageSource = ResourceHelpers.LoadLocalizedBitmapImage(typeof(ExampleCommandContent), "Resources/10x.png", CultureInfo.CurrentCulture)
         };
 
         /// <summary>
@@ -109,20 +110,20 @@ namespace ExamplePlugins.ExampleCommandPaneContent
                 // Create a multiple node, position it nicely to the right ot the random number, and add it to the same diagram
                 var multiply = Multiply.Create(ElementCreateInfo.ForNew);
                 multiply.TopLeft = new SMPoint(node.Bounds.Right + StockDiagramGeometries.StandardNodeWidth, node.Top + (2 * StockDiagramGeometries.GridSize));
-                node.Diagram.AddNode(multiply);
+                node.OwningDiagram.AddNode(multiply);
                 
                 // Wire the random number output to the first input on the multiple node
-                node.Diagram.WireWithin((NodeTerminal)node.OutputTerminals.First(), (NodeTerminal)multiply.InputTerminals.First());
+                node.OwningDiagram.WireWithin((NodeTerminal)node.OutputTerminals.First(), (NodeTerminal)multiply.InputTerminals.First());
 
                 // Create a Double Numeric Constant with an initial value of 10.0
                 var literal = Literal.Create(NITypes.Double, 10.0);
                 
                 // Position the constant nicely and add it to the diagram
                 literal.TopLeft = new SMPoint(node.Left + StockDiagramGeometries.TinyNodeWidth, node.Bounds.Bottom + (2 * StockDiagramGeometries.GridSize));
-                node.Diagram.AddNode(literal);
+                node.OwningDiagram.AddNode(literal);
 
                 // Wire the constant to the multiply node
-                node.Diagram.WireWithin(literal.OutputTerminal, (NodeTerminal) multiply.InputTerminals.ElementAt(1));
+                node.OwningDiagram.WireWithin(literal.OutputTerminal, (NodeTerminal) multiply.InputTerminals.ElementAt(1));
 
                 // Commit the transaction to finish the operation
                 transaction.Commit();

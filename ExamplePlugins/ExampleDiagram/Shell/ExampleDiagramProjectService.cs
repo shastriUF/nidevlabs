@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Globalization;
+using System.Windows.Media;
 using NationalInstruments;
 using NationalInstruments.Core;
 using NationalInstruments.ProjectExplorer;
@@ -28,7 +29,7 @@ namespace ExamplePlugins.ExampleDiagram.Shell
     /// </summary>
     public class ExampleDiagramProjectExplorerService : ProjectItemInfoSourceFileReferenceDefaultService
     {
-        public static ImageSource DefaultIcon =  ResourceHelpers.LoadBitmapImage(typeof(ExampleDiagramProjectExplorerService), "Resources/DocumentIconPaw16x16.png");
+        public static ImageSource DefaultIcon =  ResourceHelpers.LoadLocalizedBitmapImage(typeof(ExampleDiagramProjectExplorerService), "Resources/DocumentIconPaw16x16.png", CultureInfo.CurrentCulture);
 
         /// <summary>
         /// Returns the icon to use in the project tree

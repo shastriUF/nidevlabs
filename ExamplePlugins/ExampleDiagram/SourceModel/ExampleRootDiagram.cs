@@ -26,7 +26,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static new ExampleRootDiagram Create(IElementCreateInfo elementCreateInfo)
         {
             var diagram = new ExampleRootDiagram();
-            diagram.Init(elementCreateInfo);
+            diagram.Initialize(elementCreateInfo);
             return diagram;
         }
     }

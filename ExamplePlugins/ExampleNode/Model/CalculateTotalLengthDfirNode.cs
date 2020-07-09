@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using NationalInstruments.CommonModel;
 using NationalInstruments.Compiler;
 using NationalInstruments.Compiler.SemanticAnalysis;
 using NationalInstruments.Core;
@@ -43,9 +44,9 @@ namespace ExamplePlugins.ExampleNode.Model
         /// <param name="cancellationToken">Token indicating whether compile has been cancelled.</param>
         public override Task DoTypePropagationAsync(ITypePropagationAccessor typePropagationAccessor, CompileCancellationToken cancellationToken)
         {
-            GetTerminalByName("names").DataType = NITypes.StringArray1D;
-            GetTerminalByName("extra name").DataType = NITypes.String;
-            GetTerminalByName("length").DataType = NITypes.Int32;
+            GetTerminal("names").DataType = NITypes.StringArray1D;
+            GetTerminal("extra name").DataType = NITypes.String;
+            GetTerminal("length").DataType = NITypes.Int32;
             // this simple example requires all inputs to be wired
             foreach (Terminal terminal in Terminals)
             {
@@ -81,9 +82,9 @@ namespace ExamplePlugins.ExampleNode.Model
             NIType methodType = CreateMethodType();
             var methodCall = MethodCall.CreateWithErrorTerminals(diagram, methodType.GetDeclaringType(), methodType);
             methodCall.UpdateTerminals();
-            terminalAssociator.AssociateTerminalByName("names", methodCall.GetTerminalByName("names"));
-            terminalAssociator.AssociateTerminalByName("extra name", methodCall.GetTerminalByName("extraName"));
-            terminalAssociator.AssociateTerminalByName("length", methodCall.OutputTerminals.Last());
+            terminalAssociator.AssociateTerminalByIdentifier("names", methodCall.GetTerminal("names"));
+            terminalAssociator.AssociateTerminalByIdentifier("extra name", methodCall.GetTerminal("extraName"));
+            terminalAssociator.AssociateTerminalByIdentifier("length", methodCall.OutputTerminals.Last());
             return AsyncHelpers.CompletedTask;
         }
 

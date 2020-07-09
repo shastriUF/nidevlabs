@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Globalization;
+using System.Windows.Media;
 using NationalInstruments;
 using NationalInstruments.Core;
 using NationalInstruments.ProjectExplorer;
@@ -28,7 +29,7 @@ namespace ExamplePlugins.ExampleDocument.Shell
     /// </summary>
     public class TextDocumentProjectExplorerService : ProjectItemInfoSourceFileReferenceDefaultService
     {
-        public static ImageSource DefaultIcon = ResourceHelpers.LoadBitmapImage(typeof(TextDocumentProjectExplorerService), "Resources/Paper.png");
+        public static ImageSource DefaultIcon = ResourceHelpers.LoadLocalizedBitmapImage(typeof(TextDocumentProjectExplorerService), "Resources/Paper.png", CultureInfo.CurrentCulture);
 
         #region IProjectItemInfo
 

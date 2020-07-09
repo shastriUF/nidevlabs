@@ -14,6 +14,10 @@ namespace ExamplePlugins.ExampleDiagram.Design
     {
         public ExamplePluginsViewModelProvider()
         {
+        }
+
+        protected override void AddSupportedModels()
+        {
             AddSupportedModel<BasicNode>(e => new BasicNodeViewModel(e));
             AddSupportedModel<VIReferenceNode>(e => new VIReferenceNodeViewModel(e));
             AddSupportedModel<GrowableNode>(e => new GrowableNodeViewModel(e));

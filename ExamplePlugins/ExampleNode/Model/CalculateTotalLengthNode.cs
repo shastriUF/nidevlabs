@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using NationalInstruments.CommonModel;
 using NationalInstruments.Compiler;
 using NationalInstruments.DataTypes;
 using NationalInstruments.SourceModel;
@@ -73,7 +74,7 @@ namespace ExamplePlugins.ExampleNode.Model
         public static CalculateTotalLengthNode Create(IElementCreateInfo info)
         {
             var node = new CalculateTotalLengthNode();
-            node.Init(info);
+            node.Initialize(info);
             return node;
         }
 
@@ -92,9 +93,9 @@ namespace ExamplePlugins.ExampleNode.Model
         /// Performs node initialization
         /// </summary>
         /// <param name="info">Information about why the node is being created</param>
-        protected override void Init(IElementCreateInfo info)
+        protected override void Initialize(IElementCreateInfo info)
         {
-            base.Init(info);
+            base.Initialize(info);
             Width = StockDiagramGeometries.StandardNodeWidth;
             Height = StockDiagramGeometries.StandardNodeHeight;
 

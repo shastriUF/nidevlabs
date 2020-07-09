@@ -12,6 +12,10 @@ namespace ExamplePlugins.ExampleNode.Design
     {
         public ExamplePluginsViewModelProvider()
         {
+        }
+
+        protected override void AddSupportedModels()
+        {
             AddSupportedModel<MultiplyByXNode>(e => new MultiplyByXViewModel(e));
             AddSupportedModel<CalculateTotalLengthNode>(e => new CalculateTotalLengthViewModel(e));
         }

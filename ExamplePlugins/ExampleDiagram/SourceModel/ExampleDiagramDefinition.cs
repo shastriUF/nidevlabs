@@ -114,13 +114,13 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
             rules.Add(new TerminalDirectionBatchRule());
         }
 
-        protected override void Init(IElementCreateInfo info)
+        protected override void Initialize(IElementCreateInfo info)
         {
             if (!info.ForParse)
             {
                 RootDiagram = new ExampleRootDiagram();
             }
-            base.Init(info);
+            base.Initialize(info);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static ExampleDiagramDefinition Create(IElementCreateInfo elementCreateInfo)
         {
             var definition = new ExampleDiagramDefinition();
-            definition.Init(elementCreateInfo);
+            definition.Initialize(elementCreateInfo);
             return definition;
         }
     }

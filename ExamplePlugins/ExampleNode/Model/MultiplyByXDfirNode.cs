@@ -88,13 +88,13 @@ namespace ExamplePlugins.ExampleNode.Model
             MultiplyPrimitive prim = MultiplyPrimitive.Create(diagram);
 
             // connect our input terminal to the first input of the multiply node
-            terminalAssociator.AssociateTerminalByName("Input", prim.XTerminal);
+            terminalAssociator.AssociateTerminalByIdentifier("Input", prim.XTerminal);
 
             // Wire the constant to the second input of the multiply node
             Wire wire = Wire.Create(diagram, new Terminal[] {constNode.OutputTerminal, prim.YTerminal});
 
             // Connect the multiply output to our output
-            terminalAssociator.AssociateTerminalByName("Result", prim.XTimesYTerminal);
+            terminalAssociator.AssociateTerminalByIdentifier("Result", prim.XTimesYTerminal);
 
             return AsyncHelpers.CompletedTask;
         }

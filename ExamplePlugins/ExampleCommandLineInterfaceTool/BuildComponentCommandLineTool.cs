@@ -8,7 +8,6 @@ using ExamplePlugins.Resources;
 using NationalInstruments;
 using NationalInstruments.CommandLineInterface;
 using NationalInstruments.Compiler;
-using NationalInstruments.ComponentEditor.SourceModel;
 using NationalInstruments.Core;
 using NationalInstruments.Core.IO;
 using NationalInstruments.Linking;
@@ -118,7 +117,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
             }
 
             Project project = await projectAndHostCreator.OpenProjectAsync(ProjectPath);
-            CommandLineInterfaceApplication.WriteLineVerbose($"Opened project at {ProjectPath}");
+            CommandLineInterfaceApplication.WriteVerboseLine($"Opened project at {ProjectPath}");
 
             Envoy componentEnvoy = await ResolveComponentToBuildAsync(project);
             if (componentEnvoy == null)
@@ -139,7 +138,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
                 if (targetScopeService == null)
                 {
                     string errorMessage = await CreateTargetNotProvidedErrorMessageAsync(project);
-                    CommandLineInterfaceApplication.WriteError(errorMessage);
+                    CommandLineInterfaceApplication.WriteLineToError(errorMessage);
                     return null;
                 }
             }
@@ -149,7 +148,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
                 if (targetScopeService == null)
                 {
                     string errorMessage = await CreateResolveTargetErrorMessageAsync(project, Target);
-                    CommandLineInterfaceApplication.WriteError(errorMessage);
+                    CommandLineInterfaceApplication.WriteLineToError(errorMessage);
                     return null;
                 }
             }
@@ -251,7 +250,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
             Envoy componentEnvoy = matchingComponents.SingleOrDefault();
             if (componentEnvoy == null)
             {
-                CommandLineInterfaceApplication.WriteError(await CreateResolveComponentErrorMessageAsync(componentName, targetScope.GetScopeDisplayName(), targetScope));
+                CommandLineInterfaceApplication.WriteLineToError(await CreateResolveComponentErrorMessageAsync(componentName, targetScope.GetScopeDisplayName(), targetScope));
             }
 
             return componentEnvoy;
@@ -325,7 +324,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
 
         private async Task<bool> LoadAndBuildComponentEnvoyAsync(Envoy componentEnvoy)
         {
-            CommandLineInterfaceApplication.WriteLineVerbose($"Resolved to {componentEnvoy.Name.Last}");
+            CommandLineInterfaceApplication.WriteVerboseLine($"Resolved to {componentEnvoy.Name.Last}");
 
             ILockedSourceFile componentFileLock;
             try
@@ -339,7 +338,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
             }
             using (componentFileLock)
             {
-                CommandLineInterfaceApplication.WriteLineVerbose($"Loaded {componentEnvoy.Name.Last}");
+                CommandLineInterfaceApplication.WriteVerboseLine($"Loaded {componentEnvoy.Name.Last}");
                 var configurationReference = componentEnvoy.GetOwningComponentConfigurationReference();
                 if (ShowErrorIfSubTypeNotSupported(configurationReference))
                 {
@@ -351,7 +350,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
 
                 if (!buildSucceeded || saveFailed)
                 {
-                    CommandLineInterfaceApplication.WriteError(
+                    CommandLineInterfaceApplication.WriteLineToError(
                         string.Format(
                             CultureInfo.CurrentCulture,
                             LocalizedStrings.BuildComponentTool_BuildFailed,
@@ -374,7 +373,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
                     LocalizedStrings.BuildComponentTool_ComponentSubTypeNotSupported,
                     configurationReference.ComponentName.Last,
                     configurationReference.Configuration.ComponentSubtype.DisplayName);
-                CommandLineInterfaceApplication.WriteError(message);
+                CommandLineInterfaceApplication.WriteLineToError(message);
                 return true;
             }
 
@@ -434,7 +433,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
             }
             catch (Exception e) when (ExceptionHelper.ShouldExceptionBeCaught(e))
             {
-                CommandLineInterfaceApplication.WriteError(DocumentExtensions.GetUserVisibleSaveFailureMessage(envoy.FileName(), e));
+                CommandLineInterfaceApplication.WriteLineToError(DocumentExtensions.GetUserVisibleSaveFailureMessage(envoy.FileName(), e));
                 return false;
             }
         }
@@ -448,7 +447,7 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
             }
             catch (Exception e) when (ExceptionHelper.ShouldExceptionBeCaught(e))
             {
-                CommandLineInterfaceApplication.WriteError(DocumentExtensions.GetUserVisibleSaveFailureMessage(project.ProjectFileName, e));
+                CommandLineInterfaceApplication.WriteLineToError(DocumentExtensions.GetUserVisibleSaveFailureMessage(project.ProjectFileName, e));
                 return false;
             }
         }

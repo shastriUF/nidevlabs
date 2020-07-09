@@ -84,7 +84,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        var node = GrowableNode.Create(new ElementCreateInfo());
+                        var node = GrowableNode.Create(new ElementCreateInfo(diagramDefinition.Host));
                         node.Bounds = new SMRect(i * 75 + 100, i * 75 + 100, 50, 50);
                         diagramDefinition.RootDiagram.AddNode(node);
                     }

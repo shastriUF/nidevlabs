@@ -116,7 +116,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static VIReferenceNode Create(IElementCreateInfo elementCreateInfo)
         {
             var element = new VIReferenceNode();
-            element.Init(elementCreateInfo);
+            element.Initialize(elementCreateInfo);
             return element;
         }
 

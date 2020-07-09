@@ -18,6 +18,10 @@ namespace FanPlugin.Design
         /// </summary>
         public DemoViewModelProvider()
         {
+        }
+
+        protected override void AddSupportedModels()
+        {
             AddSupportedModel<FanModel>(e => new FanViewModel(e));
         }
     }

@@ -195,7 +195,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// Provides the routed path using the designated algorithm(if auto-routing is enabled),
         /// else it returns the Manhattan route"L".
         /// </remarks>
-        public IList<DiagramPoint> PreviewRouteWire(Wire wire, DiagramPoint startDiagramPoint, DiagramPoint endDiagramPoint, WireRouteDirections startDirections, WireRouteDirections endDirections, Terminal startTerminal, Terminal endTerminal, WireRoutingPurpose purpose, WireRouteDirections userHint, WireSegment endingWireSegment, bool isBranchingOperation)
+        public IList<DiagramPoint> PreviewRouteWire(Wire wire, DiagramPoint startDiagramPoint, DiagramPoint endDiagramPoint, WireRouteDirections startDirections, WireRouteDirections endDirections, WireableTerminal startTerminal, WireableTerminal endTerminal, WireRoutingPurpose purpose, WireRouteDirections userHint, WireSegment endingWireSegment, bool isBranchingOperation)
         {
             return new List<DiagramPoint>();
         }
@@ -241,7 +241,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public IList<DiagramPoint> PreviewRouteWireToPoint(WireJoint joint, WireRouteHint userHint, WireRouteDirections endDirections, DiagramPoint point, bool isBranchingOperation, bool retainPreviousRoute,
             bool forceLayout)
         {
-            SMPoint p = point.TransformTo(joint.Wire.Diagram).Point;
+            SMPoint p = point.TransformTo(joint.Wire.OwningDiagram).Point;
             double dx = p.X - joint.X;
             double dy = p.Y - joint.Y;
             // if the points are on top of each other do nothing
@@ -278,7 +278,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public IList<DiagramPoint> PreviewRouteWireToTerminal(WireJoint joint, WireRouteHint userHint, WireableTerminal terminal, bool isBranchingOperation, bool retainPreviousRoute)
         {
             var point = terminal.HotspotDiagramPoint;
-            SMPoint p = point.TransformTo(joint.Wire.Diagram).Point;
+            SMPoint p = point.TransformTo(joint.Wire.OwningDiagram).Point;
             double dx = p.X - joint.X;
             double dy = p.Y - joint.Y;
 
@@ -324,7 +324,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
             {
                 foreach (var affectedJoint in shapingElement.EffectedJoints)
                 {
-                    if (wire.Diagram != affectedJoint.DiagramPoint.Diagram)
+                    if (wire.OwningDiagram != affectedJoint.DiagramPoint.Diagram)
                     {
                         throw new InvalidOperationException("Need to reparent joint into parent wire's diagram");
                     }

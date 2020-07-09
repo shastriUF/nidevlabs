@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using NationalInstruments.CommonModel;
 using NationalInstruments.Compiler;
 using NationalInstruments.Composition;
 using NationalInstruments.Core;
 using NationalInstruments.ExecutionFramework;
 using NationalInstruments.Shell;
-using NationalInstruments.SourceModel;
 using NationalInstruments.SourceModel.Envoys;
 using NationalInstruments.VI.Design;
 using NationalInstruments.VI.SourceModel;

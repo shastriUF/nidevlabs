@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using NationalInstruments.CommonModel;
 using NationalInstruments.DataTypes;
 using NationalInstruments.SourceModel;
 using NationalInstruments.SourceModel.Persistence;
@@ -80,7 +81,7 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         public static BasicNode Create(IElementCreateInfo info)
         {
             var node = new BasicNode();
-            node.Init(info);
+            node.Initialize(info);
             return node;
         }
 
@@ -99,9 +100,9 @@ namespace ExamplePlugins.ExampleDiagram.SourceModel
         /// Performs node initialization
         /// </summary>
         /// <param name="info">Information about why the node is being created</param>
-        protected override void Init(IElementCreateInfo info)
+        protected override void Initialize(IElementCreateInfo info)
         {
-            base.Init(info);
+            base.Initialize(info);
             Width = StockDiagramGeometries.StandardNodeWidth;
             Height = StockDiagramGeometries.StandardNodeHeight;
             _input1Terminal = new NodeTerminal(Direction.Unknown, NITypes.Void, "Input 1", TerminalHotspots.CreateInputTerminalHotspot(TerminalSize.Small, 0));

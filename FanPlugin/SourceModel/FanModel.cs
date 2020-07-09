@@ -45,7 +45,7 @@ namespace FanPlugin.SourceModel
         public static FanModel Create(IElementCreateInfo info)
         {
             FanModel model = new FanModel();
-            model.Init(info);
+            model.Initialize(info);
             return model;
         }
 
