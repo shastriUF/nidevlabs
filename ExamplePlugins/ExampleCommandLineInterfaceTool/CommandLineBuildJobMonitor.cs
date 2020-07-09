@@ -262,11 +262,11 @@ namespace ExamplePlugins.ExampleCommandLineInterfaceTool
             IEnumerable<MessageInfo> errors;
             if (ComponentExtensions.ComponentHasBuildOrCompileErrors(componentEnvoy, out errors))
             {
-                CommandLineInterfaceApplication.WriteError(CreateComponentBuildErrorMessage(componentEnvoy.Name.Last, errors.ToList()));
+                CommandLineInterfaceApplication.WriteLineToError(CreateComponentBuildErrorMessage(componentEnvoy.Name.Last, errors.ToList()));
             }
             else
             {
-                CommandLineInterfaceApplication.WriteError(
+                CommandLineInterfaceApplication.WriteLineToError(
                     string.Format(
                         CultureInfo.CurrentCulture,
                         LocalizedStrings.BuildComponentTool_BuildFailedWithoutErrorMessages,
